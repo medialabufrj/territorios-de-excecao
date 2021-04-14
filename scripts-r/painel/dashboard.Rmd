@@ -1,0 +1,157 @@
+---
+title: "Police operations with helicopters"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: spacelab
+    vertical_layout: fill
+    source_code: https://github.com/medialabufrj/intervencao/
+runtime: shiny
+---
+
+```{r libs,include=FALSE,echo=FALSE}
+library(flexdashboard)
+library(shiny)
+library(rgdal)
+library(DT)
+library(leaflet)
+#library("leaflet", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.6")
+library(tidyverse)
+```
+
+```{r vars,include=FALSE,echo=FALSE}
+# OPERAÇÃO POR BAIRROS
+# link = "DEPRECATED"
+# ATENÇÃO: Este código foi feito para fins de estudos preliminares e precisa ser atualizado.
+
+# GEODATA COM BAIRROS DO RIO
+rio <- readOGR("rio.geojson")
+
+# PLANILHA COM LOCAIS
+link_locais = "DEPRECATED"
+```
+
+
+```{r etl, echo=FALSE,include=FALSE}
+## OPERAÇÃO POR BAIRROS
+df_op = read.csv(link) %>% mutate(DATA = as.POSIXct(.$DATA,format = "%d/%m/%Y"),LOCAL=tolower(.$LOCAL))
+
+dados = df_op %>% mutate(mes = lubridate::month(df_op$DATA),
+                         ano = as.character(lubridate::year(df_op$DATA))) %>% 
+  filter(BAIRRO != "ND" & BAIRRO != "Nd" & DATA > "2018-01-01" & DATA < "2020-01-01")
+
+# Faz os merges
+operacoes = sp::merge(rio,dados, duplicateGeoms = TRUE)
+
+# PLANILHA COM LOCAIS
+locais = read.csv(link_locais) %>% mutate(LOCAL = tolower(.$LOCAL))
+
+disparos = dados %>% filter(DISPARO == 1) %>% mutate(LOCAL = tolower(LOCAL)) %>% filter(LOCAL != 'nd') %>%
+  left_join(locais)
+
+    
+```
+
+```{r options}
+
+### MIN/MAX
+minima = min(operacoes$DATA,na.rm = TRUE)
+maxima = max(operacoes$DATA, na.rm = TRUE)
+
+### LABELS
+opcoes = labelOptions(
+  style = list("font-weight" = "normal", padding = "3px 8px"),
+  textsize = "15px",
+  direction = "auto")
+
+ # Cores
+    factop <- function(x) {
+      ifelse(is.na(x), 0, 0.5)
+    }
+    
+```
+
+
+Column {data-width=650} {.sidebar} 
+-----------------------------------------------------------------------
+```{r slider_lateral,}
+   sliderInput("range","INTERVALO DE DATA",min=minima,max=maxima,timeFormat = "%m/%Y",
+                         value = c(minima,maxima),dragRange = TRUE,width = '90%')
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+```{r reactives}
+# LOCAIS COM DISPAROS
+   mapa_disp = reactive({ 
+     df_disp = disparos %>%
+     #  filter(DATA >= minima & DATA <= maxima) %>%
+     filter(DATA >= input$range[1] & DATA <= input$range[2]) %>%
+     select(LOCAL,LAT,LNG,DISPARO) %>%
+     group_by(LOCAL,LAT,LNG) %>% dplyr::summarise(total = sum(DISPARO)) %>% arrange(-total)  %>% 
+       filter(!is.na(LAT) & !is.na(LNG)) %>% filter(total > 0)
+
+
+   coordinates(df_disp) <- c("LAT", "LNG")
+   proj4string(df_disp) <- CRS("+proj=longlat +datum=WGS84")
+
+   sp::merge(df_disp, locais,  duplicateGeoms = TRUE)
+   })
+
+## OPERAÇÃO POR BAIRROS
+mapa_op = reactive({
+   df = operacoes@data %>%
+      filter(DATA >= input$range[1] & DATA <= input$range[2]) %>%
+     #filter(DATA >= minima & DATA <= maxima) %>%
+      group_by(BAIRRO) %>% dplyr::summarise(total = n()) %>% filter(total > 0) %>% arrange(total)
+
+sp::merge(rio,df,all.x=FALSE)
+})
+
+```
+
+### Mapa com operações (azul) e disparos (vermelho)
+
+```{r prep_mapa, echo=FALSE,cache=FALSE}
+
+renderLeaflet({
+pal = colorBin(palette = "PuBu",domain = mapa_op()$total,bins=3,na.color = 'gray')
+
+# Labels
+labels <- sprintf(
+     "%d operações em %s",
+     mapa_op()$total,mapa_op()$BAIRRO
+   )
+   
+labels_disp <- sprintf(
+     "%d disparos em %s",
+     mapa_disp()$total,toupper(mapa_disp()$LOCAL)
+   )
+
+# MAPA  
+  leaflet(data=rio,options = leafletOptions(minZoom = 11)) %>% addProviderTiles(providers$CartoDB.Positron,
+                                         options=providerTileOptions(opacity=0.45)) %>%
+        addPolygons(data = mapa_op(), color = "#444444", weight = 1,
+                    smoothFactor = 0.5,fillColor = ~pal(total),label = labels, fillOpacity  = ~factop(mapa_op()$total),
+                     labelOptions = opcoes) %>%
+ addLegend(title = "OPERAÇÕES",position = "bottomright",pal = pal, values = ~mapa_op()$total) %>% 
+  addCircles(data = mapa_disp(),radius = ~sqrt(mapa_disp()$total) * 175,color = "red", label = labels_disp,labelOptions = opcoes)
+  
+}) # END RENDERLEAFLEFT
+
+```
+
+### Tabela com operações
+
+```{r table, echo=FALSE}
+
+df_table = reactive({
+    df_table = dados %>%
+     filter(DATA >= input$range[1] & DATA <= input$range[2]) %>%
+    #  filter(DATA >= minima & DATA <= maxima) %>%
+      select(BAIRRO,LOCAL,DISPARO,DATA,RELATO,FONTE) %>% mutate(DATA = as.character(DATA))
+})
+
+options(DT.options = list(scrollY="100vh"))
+DT::renderDataTable(df_table())
+```

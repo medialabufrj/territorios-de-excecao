@@ -1,0 +1,138 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "operacoes_helicoptero_rj",
+      "path": "operacoes_helicoptero_rj.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "disparo",
+            "type": "boolean",
+            "format": "default",
+            "title": "Disparos a partir de helicóptero",
+            "description": "Indício de disparos a partir de helicópteros. "
+          },
+          {
+            "name": "cidade",
+            "type": "string",
+            "format": "default",
+            "title": "Cidade",
+            "description": "Município de ocorrência do evento"
+          },
+          {
+            "name": "bairro",
+            "type": "string",
+            "format": "default",
+            "title": "Bairro",
+            "description": "Macro-recorte geográfico da ocorrência: por exemplo, Complexo da Maré. Utilizando a nomenclatura de bairros do Instituto Pereira Passos."
+          },
+          {
+            "name": "cod_bairro",
+            "type": "string",
+            "format": "default",
+            "description": "Código do bairro segundo mapa do Instituto Pereira Passos.",
+            "title": "Código do Bairro (IPP)"
+          },
+          {
+            "name": "local",
+            "type": "string",
+            "format": "default",
+            "description": "Comunidade ou localidade específica da ocorrência: por exemplo, Vila do Pinheiro",
+            "title": "Localidade"
+          },
+          {
+            "name": "outras_regioes",
+            "type": "any",
+            "format": "default",
+            "title": "Outras regiões",
+            "description": "Outras localidades impactadas no evento."
+          },
+          {
+            "name": "fonte",
+            "type": "string",
+            "format": "default",
+            "title": "Fonte primária",
+            "description": "Referência para a fonte principal."
+          },
+          {
+            "name": "fonte2",
+            "type": "any",
+            "format": "default",
+            "title": "Fonte secundária",
+            "description": "Referência da fonte secundária"
+          },
+          {
+            "name": "tipo_operacao",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de operação",
+            "description": "APOIO - Operações onde o H. é utilizado para acompanhamento ou como apoio em ações de outros órgãos\nDILIGÊNCIA - Checagem, averiguação ou diligências\nVINGANÇA - Casos com indícios de \"operações vingança\""
+          },
+          {
+            "name": "media_fonte",
+            "type": "any",
+            "format": "default",
+            "title": "Mídia",
+            "description": "Nome do veículo de mídia que noticiou"
+          },
+          {
+            "name": "media_link",
+            "type": "any",
+            "format": "default",
+            "title": "Link para mídia",
+            "description": "Link da matéria"
+          },
+          {
+            "name": "presenca_civil",
+            "type": "any",
+            "format": "default",
+            "title": "Órgãos da Polícia Civil do Rio de Janeiro presentes no evento"
+          },
+          {
+            "name": "presenca_pmerj",
+            "type": "string",
+            "format": "default",
+            "title": "Órgãos da Polícia Militar do Estado do Rio de Janeiro presentes no evento"
+          },
+          {
+            "name": "presenca_uniao",
+            "type": "string",
+            "format": "default",
+            "title": "Presença da União",
+            "description": "Órgãos da União presentes no evento"
+          },
+          {
+            "name": "data",
+            "type": "date",
+            "format": "DD/MM/YYYY",
+            "title": "data",
+            "description": "Data da ocorrência"
+          }
+        ]
+      },
+      "format": "CSV, comma separated",
+      "title": "Operações com helicóptero no Rio de Janeiro",
+      "description": "O mapeamento de forma mais sistemática se concentrou nos anos 2018 e 2019, no entanto, é possível encontrar outros registros."
+    }
+  ],
+  "name": "territorios-de-excecao",
+  "title": "Territórios de Exceção",
+  "description": "Pacote de dados utilizado na pesquisa",
+  "homepage": "documental.xyz",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "title": "Adriano Belisário",
+      "role": "author"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "CC-BY-SA-4.0",
+      "title": "Creative Commons Attribution Share-Alike 4.0",
+      "path": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ]
+}

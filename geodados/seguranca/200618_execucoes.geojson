@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "200618_execucoes",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Local execucao 5 jovens", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "gx_media_links": null }, "geometry": { "type": "Point", "coordinates": [ -43.2349605, -22.8677088, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Marcus Vincius", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "gx_media_links": null }, "geometry": { "type": "Point", "coordinates": [ -43.233159, -22.8672216, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Execucao Levi", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "gx_media_links": null }, "geometry": { "type": "Point", "coordinates": [ -43.2375764, -22.8671852, 0.0 ] } }
+]
+}

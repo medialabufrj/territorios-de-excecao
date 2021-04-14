@@ -1,0 +1,18 @@
+column,type,format,title,description
+disparo,boolean,default,Disparos a partir de helicóptero,Indício de disparos a partir de helicópteros. 
+cidade,string,default,Cidade,Município de ocorrência do evento
+bairro,string,default,Bairro,"Macro-recorte geográfico da ocorrência: por exemplo, Complexo da Maré. Utilizando a nomenclatura de bairros do Instituto Pereira Passos."
+cod_bairro,string,default,Código do Bairro (IPP),Código do bairro segundo mapa do Instituto Pereira Passos.
+local,string,default,Localidade,"Comunidade ou localidade específica da ocorrência: por exemplo, Vila do Pinheiro"
+outras_regioes,any,default,Outras regiões,Outras localidades impactadas no evento.
+fonte,string,default,Fonte primária,Referência para a fonte principal.
+fonte2,any,default,Fonte secundária,Referência da fonte secundária
+tipo_operacao,string,default,Tipo de operação,"APOIO - Operações onde o H. é utilizado para acompanhamento ou como apoio em ações de outros órgãos
+DILIGÊNCIA - Checagem, averiguação ou diligências
+VINGANÇA - Casos com indícios de ""operações vingança"""
+media_fonte,any,default,Mídia,Nome do veículo de mídia que noticiou
+media_link,any,default,Link para mídia,Link da matéria
+presenca_civil,any,default,Órgãos da Polícia Civil do Rio de Janeiro presentes no evento,Órgãos da União presentes no evento
+presenca_pmerj,string,default,Órgãos da Polícia Militar do Estado do Rio de Janeiro presentes no evento,Data da ocorrência
+presenca_uniao,string,default,Presença da União,
+data,date,DD/MM/YYYY,data,
