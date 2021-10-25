@@ -4,17 +4,23 @@ Repositório com dados, scripts e referências do projeto 'Territórios de exce�
 
 Investigação sobre violações de direitos no uso de helicópteros policiais no Rio de Janeiro. Realizado por MediaLab.UFRJ e Agência Autônoma, em parceria com Redes da Maré, Fogo Cruzado, Pista News, Witness e Rede LAVITS.
 
-## Créditos
+---
+## English 
+Repository with data, scripts and references from the 'Exception Territories' project.
 
-**Coordenação**: Fernanda Bruno, [Adriano Belisário](https://github.com/belisards) e Paulo Tavares
+Investigation about human rights violations in the use of police helicopters in Rio de Janeiro. Directed by MediaLab.UFRJ and Agência Autónoma, in partnership with Redes da Maré, Fogo Cruzado, Pista News, Witness and Rede LAVITS. 
 
-**Análise e visualização de dados**: Adriano Belisário
+## Créditos/Credits
 
-**Assistência de pesquisa**: Ingra Maciel e Debora Pio 
+**Coordenação/coordination**: Fernanda Bruno, [Adriano Belisário](https://github.com/belisards) e Paulo Tavares
 
-**Desenvolvedor web**: Marlus Araújo
+**Análise e visualização de dados/Data analysis and visualization**: Adriano Belisário
 
-## Fontes dos dados
+**Assistência de pesquisa/Research assistant**: Ingra Maciel e Debora Pio 
+
+**Desenvolvedor web/Web developer**: Marlus Araújo
+
+## Fontes dos dados/Data sources
 
 Agência Nacional de Aviação Civil (ANAC)
 
