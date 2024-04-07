@@ -2,7 +2,7 @@
 Dados geográficos relevantes para a pesquisa.
 
 ### seguranca (Segurança pública)
-**crs_milicia_g1.geojson**: Mapeamento de milícia realizado pelo G1 (2018).
+**crs_milicia_g1.geojson**: [Mapeamento de milícia realizado pelo G1 (2018)](https://especiais.g1.globo.com/rio-de-janeiro/2018/mapa-das-milicias-do-rio-de-janeiro/).
 
 **tiros-200618**: Geolocalização aproximada de evidências audiovisuais coletadas pela Redes da Maré durante a operação do dia 20 de junho de 2018.
 
